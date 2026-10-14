@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<!-- Benign look-alike: an in-browser game preview (blob, new tab) that captures arrow keys/space and
+     requests fullscreen after a real key press. Traps-ish behaviour without scam content. CLEAN or at most WARN. -->
+<html lang="en"><head><meta charset="utf-8"><title>Game Jam</title></head>
+<body><h1>Game Jam entries</h1><button id="play">Play "Comet Dodge" preview</button>
+<script>
+  document.getElementById('play').addEventListener('click', () => {
+    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Comet Dodge</title>
+    <style>body{margin:0;background:#000;color:#9f9;font-family:monospace}canvas{display:block;width:100vw;height:90vh}</style></head>
+    <body><canvas id="c"></canvas><p>Score: <span id="s">0</span> — arrows to move, space to fire, Esc to pause</p>
+    <script>
+      let paused = false;
+      document.addEventListener('keydown', e => {
+        if (['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(e.key)) e.preventDefault();
+        if (e.key === 'Escape') paused = !paused;
+        if (e.isTrusted && !document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => {});
+      });
+    <\/script></body></html>`;
+    window.open(URL.createObjectURL(new Blob([html], { type: 'text/html' })), '_blank');
+  });
+</script></body></html>

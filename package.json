@@ -1,0 +1,15 @@
+{
+  "name": "lock-screen-guard",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Chrome MV3 extension that detects and stops fake OS lock-screen scam pages (blob:/data: URLs) and ClickFix clipboard lures.",
+  "scripts": {
+    "test": "node --test eval/signals.test.mjs",
+    "eval": "node eval/run-eval.mjs",
+    "check": "npm test && npm run eval"
+  },
+  "devDependencies": {
+    "playwright": "1.56.1"
+  },
+  "license": "MIT"
+}

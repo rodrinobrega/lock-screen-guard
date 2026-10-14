@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<!-- Benign: blob preview of a generated PDF. Gate must skip non-HTML blobs entirely. -->
+<html lang="en"><head><meta charset="utf-8"><title>Invoices</title></head>
+<body><h1>Invoices</h1><button id="preview">Preview invoice PDF</button>
+<script>
+  document.getElementById('preview').addEventListener('click', () => {
+    const pdf = '%PDF-1.4\n1 0 obj<</Type/Catalog/Pages 2 0 R>>endobj 2 0 obj<</Type/Pages/Kids[3 0 R]/Count 1>>endobj ' +
+      '3 0 obj<</Type/Page/Parent 2 0 R/MediaBox[0 0 300 144]>>endobj\ntrailer<</Root 1 0 R>>\n%%EOF';
+    window.open(URL.createObjectURL(new Blob([pdf], { type: 'application/pdf' })), '_blank');
+  });
+</script></body></html>

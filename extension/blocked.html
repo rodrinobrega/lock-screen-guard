@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Blocked by Lock-Screen Guard</title>
+<link rel="stylesheet" href="blocked.css" />
+</head>
+<body>
+  <main>
+    <p class="badge">Lock-Screen Guard</p>
+    <h1>We stopped a fake "computer locked" page</h1>
+    <p class="lead">
+      The page you were on pretended your computer was locked and told you to call a
+      support number. <strong>Your computer is not locked</strong>, and nothing was installed.
+      Microsoft and Apple never ask you to call a number shown in a browser window.
+    </p>
+    <ul>
+      <li>Don't call the number it showed you.</li>
+      <li>Don't install software or give remote access to anyone who contacts you about it.</li>
+      <li>If you already called, contact your bank and change important passwords.</li>
+    </ul>
+    <button id="new-tab" type="button">Open a new tab</button>
+    <details>
+      <summary>Why was this blocked?</summary>
+      <p id="reason"></p>
+      <ul id="hits"></ul>
+    </details>
+  </main>
+  <script src="blocked.js"></script>
+</body>
+</html>

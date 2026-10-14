@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<!-- Variant: only blocks escape keys — no right-click or unload trap. Traps family must still reach its threshold. -->
+<html lang="en"><head><meta charset="utf-8"><title>Loading</title></head>
+<body>
+<script>
+  const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Windows</title>
+  <style>body{margin:0;background:#0078d7;color:#fff;font-family:Segoe UI,Arial;padding:60px}</style></head>
+  <body><h1>Your device has been locked</h1><p>Windows Security support: 1-833-555-0100</p>
+  <script>
+    document.addEventListener('keydown', e => { if (['F5','F11','Escape'].includes(e.key) || (e.ctrlKey && e.key.toLowerCase() === 'w')) e.preventDefault(); });
+  <\/script></body></html>`;
+  location.href = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
+</script></body></html>

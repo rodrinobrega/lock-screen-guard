@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<!-- Benign look-alike: an article ABOUT lock-screen scams, opened as a blob in a new tab by a click.
+     Content family fires on its own (quotes scam text, phone number); traps and context do not. Must stay CLEAN. -->
+<html lang="en"><head><meta charset="utf-8"><title>Security Blog</title></head>
+<body><h1>Security Blog</h1><button id="open">Open article (offline copy)</button>
+<script>
+  document.getElementById('open').addEventListener('click', () => {
+    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>How tech-support scams work</title></head>
+    <body style="font-family:Georgia;max-width:680px;margin:40px auto">
+    <h1>How fake "computer locked" scams work</h1>
+    <p>Scammers show a full-screen page that says "Your computer has been locked" and claims to be Microsoft Support.
+    It shows a phone number such as 1-800-555-0199 and an error code like 0x800704cf, and urges you to call immediately.</p>
+    <p>Real companies never do this. Close the tab and do not call.</p></body></html>`;
+    window.open(URL.createObjectURL(new Blob([html], { type: 'text/html' })), '_blank');
+  });
+</script></body></html>

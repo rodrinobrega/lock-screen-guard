@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<!-- Benign ClickFix look-alike: developer docs with a visible install command and a copy button.
+     Command-shaped payload + "paste in your terminal", but the payload is visible and there is no lure. Must stay CLEAN. -->
+<html lang="en"><head><meta charset="utf-8"><title>Install — Acme CLI docs</title></head>
+<body style="font-family:Arial;margin:40px">
+<h1>Install the Acme CLI</h1>
+<p>Paste this command in your terminal:</p>
+<pre id="cmd">curl -fsSL https://example.com/acme/install.sh | sh</pre>
+<button id="copy">Copy</button> <span id="status"></span>
+<script>
+  document.getElementById('copy').addEventListener('click', async () => {
+    await navigator.clipboard.writeText(document.getElementById('cmd').textContent);
+    document.getElementById('status').textContent = 'Copied!';
+  });
+</script></body></html>

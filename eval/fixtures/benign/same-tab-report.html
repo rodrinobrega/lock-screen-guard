@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<!-- Benign look-alike: an export page that automatically replaces itself with the generated report (same tab, no click).
+     The navigation-context family fires on its own; content and traps do not. Must stay CLEAN. -->
+<html lang="en"><head><meta charset="utf-8"><title>Exporting…</title></head>
+<body><p>Preparing your export…</p>
+<script>
+  const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Export — Orders</title></head>
+  <body style="font-family:Arial;margin:40px"><h1>Orders export</h1>
+  <table border="1" cellpadding="6"><tr><th>Order</th><th>Total</th></tr><tr><td>#1001</td><td>€42.00</td></tr></table></body></html>`;
+  location.href = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
+</script></body></html>

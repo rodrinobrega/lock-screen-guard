@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "Lock-Screen Guard",
+  "version": "0.1.0",
+  "description": "Detects and stops fake OS lock-screen scam pages rendered from blob:/data: URLs, and blocks ClickFix clipboard lures.",
+  "permissions": ["webNavigation", "scripting", "tabs", "storage"],
+  "host_permissions": ["<all_urls>"],
+  "background": { "service_worker": "background.js" },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "match_origin_as_fallback": true,
+      "all_frames": true,
+      "run_at": "document_start",
+      "world": "MAIN",
+      "js": ["content/hooks.js"]
+    },
+    {
+      "matches": ["<all_urls>"],
+      "match_origin_as_fallback": true,
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": ["content/signals.js", "content/detector.js"]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'none'; base-uri 'none'"
+  },
+  "icons": { "128": "icons/icon128.png" }
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--
+  Legitimate use case for the interview assignment: a simple in-browser
+  "document viewer" that generates a file client-side and displays it,
+  similar to how real sites preview generated reports, exports, or PDFs.
+  The extension must NOT interfere with this flow.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Report Viewer</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 40px; }
+  button { padding: 8px 16px; font-size: 14px; }
+</style>
+</head>
+<body>
+  <h1>Monthly Report Viewer</h1>
+  <p>Click below to generate and view your report.</p>
+  <button id="view-report">View Generated Report</button>
+
+<script>
+  document.getElementById('view-report').addEventListener('click', () => {
+    const reportContent = `
+      <!DOCTYPE html>
+      <html>
+      <head><meta charset="utf-8" /><title>Monthly Report</title></head>
+      <body style="font-family: Arial, sans-serif; margin: 40px;">
+        <h1>Monthly Report</h1>
+        <p>Generated on: ${new Date().toDateString()}</p>
+        <table border="1" cellpadding="8">
+          <tr><th>Item</th><th>Value</th></tr>
+          <tr><td>Sessions</td><td>1,204</td></tr>
+          <tr><td>Conversions</td><td>87</td></tr>
+        </table>
+      </body>
+      </html>
+    `;
+    const blob = new Blob([reportContent], { type: 'text/html' });
+    const blobUrl = URL.createObjectURL(blob);
+    window.open(blobUrl, '_blank');
+  });
+</script>
+</body>
+</html>

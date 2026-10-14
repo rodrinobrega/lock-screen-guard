@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<!-- Known gap (plan.md §12.1 #7): scam text drawn on a <canvas>, so the content family reads nothing.
+     Heavy trapping alone yields WARN (dismissible banner + "Leave page"), not a hard block. -->
+<html lang="en"><head><meta charset="utf-8"><title>Loading</title></head>
+<body>
+<script>
+  const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title> </title>
+  <style>html,body{margin:0;height:100%;background:#002bff}canvas{display:block}</style></head>
+  <body><canvas id="c"></canvas>
+  <script>
+    const c = document.getElementById('c'); c.width = innerWidth; c.height = innerHeight;
+    const g = c.getContext('2d'); g.fillStyle = '#fff'; g.font = '28px Arial'; g.textAlign = 'center';
+    g.fillText('Your computer has been locked', c.width / 2, c.height / 2 - 20);
+    g.fillText('Call Microsoft Support: 1-800-555-0199', c.width / 2, c.height / 2 + 20);
+    document.addEventListener('keydown', e => e.preventDefault());
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    window.addEventListener('beforeunload', e => { e.preventDefault(); e.returnValue = ''; });
+  <\/script></body></html>`;
+  location.href = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
+</script></body></html>

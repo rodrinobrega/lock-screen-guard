@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<!-- Benign look-alike: a generated slideshow with arrow-key navigation and fullscreen on user click. -->
+<html lang="en"><head><meta charset="utf-8"><title>Slides</title></head>
+<body><h1>Quarterly review</h1><button id="present">Present</button>
+<script>
+  document.getElementById('present').addEventListener('click', () => {
+    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Q3 Review — Slide 1</title>
+    <style>body{margin:0;background:#111;color:#fff;font-family:Arial;height:100vh;display:flex;align-items:center;justify-content:center}</style></head>
+    <body><div><h1>Q3 Review</h1><p>Press → for next slide, Esc to exit fullscreen</p></div>
+    <script>
+      document.addEventListener('keydown', e => { if (['ArrowRight','ArrowLeft','PageDown','PageUp'].includes(e.key)) e.preventDefault(); });
+      document.addEventListener('click', () => document.documentElement.requestFullscreen().catch(() => {}));
+    <\/script></body></html>`;
+    window.open(URL.createObjectURL(new Blob([html], { type: 'text/html' })), '_blank');
+  });
+</script></body></html>

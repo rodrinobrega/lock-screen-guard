@@ -1,0 +1,256 @@
+{
+  "description": "Labelled corpus for run-eval.mjs. expected = acceptable verdicts. steps run in order after the page loads. 'families' documents which signal families should fire (for debugging, not asserted).",
+  "cases": [
+    {
+      "id": "malicious/base",
+      "file": "malicious/base.html",
+      "expected": [
+        "SCAM"
+      ],
+      "families": "A B C",
+      "note": "The provided sample"
+    },
+    {
+      "id": "malicious/delayed-redirect",
+      "file": "malicious/delayed-redirect.html",
+      "expected": [
+        "SCAM"
+      ],
+      "families": "A B C",
+      "note": "Redirect after 1.2 s"
+    },
+    {
+      "id": "malicious/data-iframe",
+      "file": "malicious/data-iframe.html",
+      "expected": [
+        "SCAM"
+      ],
+      "families": "B C",
+      "note": "Lock screen in a full-viewport data: iframe"
+    },
+    {
+      "id": "malicious/srcdoc-fullscreen",
+      "file": "malicious/srcdoc-fullscreen.html",
+      "expected": [
+        "SCAM"
+      ],
+      "families": "B C",
+      "note": "Blob page -> srcdoc iframe, fullscreen + pointer lock grab"
+    },
+    {
+      "id": "malicious/iframe-about-blank",
+      "file": "malicious/iframe-about-blank.html",
+      "expected": [
+        "SCAM"
+      ],
+      "families": "B C",
+      "note": "document.write into a full-viewport about:blank iframe"
+    },
+    {
+      "id": "malicious/history-flood",
+      "file": "malicious/history-flood.html",
+      "expected": [
+        "SCAM"
+      ],
+      "families": "A B C",
+      "note": "No key blocking; pushState flood + unload trap"
+    },
+    {
+      "id": "malicious/phone-obfuscated",
+      "file": "malicious/phone-obfuscated.html",
+      "expected": [
+        "SCAM"
+      ],
+      "families": "A B C",
+      "note": "Zero-width chars, fullwidth digits, nb-hyphens"
+    },
+    {
+      "id": "malicious/apple-variant",
+      "file": "malicious/apple-variant.html",
+      "expected": [
+        "SCAM"
+      ],
+      "families": "A B C",
+      "note": "macOS wording, black bg, fullscreen grab"
+    },
+    {
+      "id": "malicious/no-beforeunload",
+      "file": "malicious/no-beforeunload.html",
+      "expected": [
+        "SCAM"
+      ],
+      "families": "A B C",
+      "note": "Escape keys only"
+    },
+    {
+      "id": "malicious/late-install",
+      "file": "malicious/late-install.html",
+      "expected": [
+        "SCAM"
+      ],
+      "late": true,
+      "families": "B C",
+      "note": "Page already open when the extension is enabled"
+    },
+    {
+      "id": "malicious/canvas-only",
+      "file": "malicious/canvas-only.html",
+      "expected": [
+        "WARN"
+      ],
+      "families": "A B (C unreadable)",
+      "note": "Known gap: canvas-rendered text -> WARN banner, not a block"
+    },
+    {
+      "id": "benign/report-viewer",
+      "file": "benign/report-viewer.html",
+      "expected": [
+        "CLEAN"
+      ],
+      "steps": [
+        {
+          "click": "#view-report"
+        }
+      ],
+      "families": "-",
+      "note": "The provided sample"
+    },
+    {
+      "id": "benign/scam-article",
+      "file": "benign/scam-article.html",
+      "expected": [
+        "CLEAN"
+      ],
+      "steps": [
+        {
+          "click": "#open"
+        }
+      ],
+      "families": "C only",
+      "note": "Article quoting scam text"
+    },
+    {
+      "id": "benign/webgl-game",
+      "file": "benign/webgl-game.html",
+      "expected": [
+        "CLEAN",
+        "WARN"
+      ],
+      "steps": [
+        {
+          "click": "#play"
+        }
+      ],
+      "families": "B-ish",
+      "note": "Game captures keys, fullscreen on real key press"
+    },
+    {
+      "id": "benign/code-sandbox",
+      "file": "benign/code-sandbox.html",
+      "expected": [
+        "CLEAN"
+      ],
+      "steps": [
+        {
+          "click": "#open"
+        }
+      ],
+      "families": "B partial",
+      "note": "Editor captures Ctrl+S/W, unsaved-changes guard"
+    },
+    {
+      "id": "benign/kiosk-slides",
+      "file": "benign/kiosk-slides.html",
+      "expected": [
+        "CLEAN"
+      ],
+      "steps": [
+        {
+          "click": "#present"
+        }
+      ],
+      "families": "-",
+      "note": "Slideshow, arrow keys"
+    },
+    {
+      "id": "benign/pdf-preview",
+      "file": "benign/pdf-preview.html",
+      "expected": [
+        "CLEAN"
+      ],
+      "steps": [
+        {
+          "click": "#preview"
+        }
+      ],
+      "families": "gated out",
+      "note": "application/pdf blob"
+    },
+    {
+      "id": "benign/same-tab-report",
+      "file": "benign/same-tab-report.html",
+      "expected": [
+        "CLEAN"
+      ],
+      "families": "A only",
+      "note": "Export page that auto-replaces itself with a blob"
+    },
+    {
+      "id": "benign/docs-install-command",
+      "file": "benign/docs-install-command.html",
+      "expected": [
+        "CLEAN"
+      ],
+      "steps": [
+        {
+          "click": "#copy"
+        }
+      ],
+      "clipboardMustContain": "install.sh",
+      "families": "-",
+      "note": "Visible command + copy button"
+    },
+    {
+      "id": "clickfix/fake-captcha",
+      "file": "clickfix/fake-captcha.html",
+      "expected": [
+        "CLICKFIX"
+      ],
+      "steps": [
+        {
+          "click": "#verify"
+        }
+      ],
+      "clipboardMustNotContain": "-w hidden -enc",
+      "note": "clipboard.writeText path"
+    },
+    {
+      "id": "clickfix/silent-copy",
+      "file": "clickfix/silent-copy.html",
+      "expected": [
+        "CLICKFIX"
+      ],
+      "steps": [
+        {
+          "click": "#fix"
+        }
+      ],
+      "clipboardMustNotContain": "mshta",
+      "note": "execCommand('copy') on hidden textarea"
+    },
+    {
+      "id": "clickfix/copy-event",
+      "file": "clickfix/copy-event.html",
+      "expected": [
+        "CLICKFIX"
+      ],
+      "steps": [
+        {
+          "click": "#copy"
+        }
+      ],
+      "clipboardMustNotContain": "cmd /c",
+      "note": "copy-event setData hijack"
+    }
+  ]
+}

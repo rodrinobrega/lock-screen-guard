@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<!-- Benign look-alike: an editor preview that legitimately captures Ctrl+S / Ctrl+W and warns about unsaved changes. -->
+<html lang="en"><head><meta charset="utf-8"><title>Sandbox</title></head>
+<body><h1>Code Sandbox</h1><button id="open">Open editor in new tab</button>
+<script>
+  document.getElementById('open').addEventListener('click', () => {
+    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>untitled.js — Editor</title></head>
+    <body style="margin:0;background:#1e1e1e;color:#ddd;font-family:monospace">
+    <textarea style="width:100vw;height:95vh;background:#1e1e1e;color:#ddd;border:0">console.log('hello');</textarea>
+    <script>
+      document.addEventListener('keydown', e => {
+        if ((e.ctrlKey || e.metaKey) && ['s','w'].includes(e.key.toLowerCase())) e.preventDefault();
+      });
+      window.addEventListener('beforeunload', e => { e.preventDefault(); e.returnValue = 'You have unsaved changes'; });
+    <\/script></body></html>`;
+    window.open(URL.createObjectURL(new Blob([html], { type: 'text/html' })), '_blank');
+  });
+</script></body></html>
